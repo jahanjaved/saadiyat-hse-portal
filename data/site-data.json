@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "selectedWeek": 15,
+    "selectedMonth": "2026-04",
+    "inspectionCount": 1,
+    "clusters": ["Cluster 7A"]
+  },
+  "weeklyInspections": [
+    {
+      "Inspection_ID": "sample-1",
+      "Inspection_Date": "2026-04-06",
+      "Week_No": 15,
+      "Month": "2026-04",
+      "Package": 2,
+      "Cluster": "Cluster 7A",
+      "Area_or_Villa": "General",
+      "Main_High_Risk_Activity": "Edge Protection",
+      "Work_at_Height": 3,
+      "Edge_Protection": 3,
+      "Falling_Object_Prevention": 2,
+      "Excavation_Safety": null,
+      "Scaffolding_Compliance": 2.5,
+      "PTW_Implementation": 2,
+      "PTW_Field_Verification": 1,
+      "MSRA_Quality": null,
+      "Lifting/Precast Installation": 2,
+      "Traffic_Interface": 4,
+      "Housekeeping/Waste Management": 2,
+      "Welfare Arrangement": 4,
+      "Fire_Readiness": 2,
+      "Supervision_Subcontractor": 1,
+      "Electrical_Tool_Safety": 2,
+      "Raw_Score_%": 0.3933,
+      "Critical_Red_Flag": "NO",
+      "Rating_Band": "Critical"
+    }
+  ],
+  "capa": [],
+  "gapAnalysis": { "kpis": [] },
+  "schedules": {},
+  "rawSheets": {}
+}
