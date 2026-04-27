@@ -1,1 +1,0 @@
-Final updated version with ALDAR logo
