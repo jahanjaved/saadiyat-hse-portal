@@ -1,1 +1,0 @@
-Updated app.js with logo fix
