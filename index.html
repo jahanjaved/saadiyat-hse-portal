@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALDAR OSH Inspection Report Generator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <div class="brand">
+        <img src="aldar.png" alt="ALDAR logo" />
+        <div><h1>ALDAR Projects OSH Inspection Report</h1><p>Smart ALDAR/KEO report wording engine</p></div>
+      </div>
+      <div class="actions"><button id="addObservationBtn" class="btn secondary">+ Add Observation</button><button id="generateDocBtn" class="btn primary">Generate Word File</button></div>
+    </header>
+
+    <section class="panel">
+      <h2>Report Header</h2>
+      <div class="grid four">
+        <label>Project Title<input id="projectTitle" value="Saadiyat Lagoons Packages 02 & 04 villas and infrastructure work." /></label>
+        <label>Date<input id="inspectionDate" type="date" /></label>
+        <label>Time<input id="inspectionTime" type="time" value="09:30" /></label>
+        <label>Reference No.<input id="referenceNo" placeholder="225" /></label>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="sectionHead"><h2>Attendees</h2><button id="addAttendeeBtn" class="btn secondary">+ Add Attendee</button></div>
+      <table class="simple"><thead><tr><th>Name</th><th>Designation</th><th>Entity</th><th></th></tr></thead><tbody id="attendeeRows"></tbody></table>
+    </section>
+
+    <section class="panel">
+      <h2>Observations</h2>
+      <div id="observationsContainer" class="obsList"></div>
+    </section>
+
+    <div id="statusBox" class="status">Ready.</div>
+  </main>
+
+  <template id="attendeeTpl"><tr><td><input class="attendeeName" placeholder="Name"></td><td><input class="attendeeDesignation" placeholder="Designation"></td><td><select class="attendeeEntity"><option>KEO</option><option>Hill</option><option>TAJV</option><option>Innovo</option><option>Hi-Tech</option><option>Aldar</option></select></td><td><button type="button" class="remove small">×</button></td></tr></template>
+
+  <template id="observationTpl">
+    <article class="obsCard">
+      <div class="obsHead"><h3>Observation <span class="obsNo"></span></h3><button type="button" class="remove removeObs">×</button></div>
+      <div class="grid five">
+        <label>Package<select class="package"></select></label>
+        <label>Cluster / Area<input class="cluster" placeholder="Cluster 2B / 7A / 8C" /></label>
+        <label>Villa / Location<input class="villaNo" placeholder="Villa 75 / Block 01" /></label>
+        <label>Observation Category<select class="observationCategory"></select></label>
+        <label>Risk Category<select class="riskCategory"><option>High</option><option>Medium</option><option>Low</option></select></label>
+      </div>
+      <div class="grid four">
+        <label>Response Category<select class="responseCategory"><option>A</option><option>B</option><option>C</option><option>D</option></select></label>
+        <label>By Whom / Action Owner<select class="actionOwner"><option>TAJV</option><option>Innovo</option><option>TAJV / Hi-tech Project Management</option><option>PM / CM / HSE</option></select></label>
+        <label>Likely Root Cause<select class="rootCause"></select></label>
+        <label>Date Closed<input class="dateClosed" type="date" /></label>
+      </div>
+      <div class="smartbar"><button type="button" class="btn secondary autofill">Auto-fill ALDAR wording</button><span class="areaPreview">Area: -</span></div>
+      <div class="grid two">
+        <label>Observation Description<select class="descriptionPick"></select><div class="chips descriptionChips"></div><textarea class="observationDescription" rows="8"></textarea></label>
+        <label>Immediate Action Taken<select class="immediatePick"></select><div class="chips immediateChips"></div><textarea class="immediateAction" rows="8"></textarea></label>
+      </div>
+      <label>Action to be taken as agreed, but not limited to<select class="actionPick"></select><div class="chips actionChips"></div><textarea class="preventiveAction" rows="10"></textarea></label>
+      <label>Legal/other Requirements<div class="legalToolbar"><button type="button" class="btn light selectAllLegal">Select All</button><button type="button" class="btn light clearLegal">Clear</button></div><div class="legalGrid"></div><textarea class="legalCustom" rows="3" placeholder="Additional references"></textarea></label>
+      <label>Evidence Photos<input class="evidencePhotos" type="file" accept="image/*" multiple /><div class="photoPreview"></div></label>
+    </article>
+  </template>
+
+  <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
