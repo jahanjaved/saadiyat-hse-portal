@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OSH Inspection Report</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div>
+        <h1>OSH Inspection Report</h1>
+        <p>ALDAR Projects inspection report generator</p>
+      </div>
+      <div class="top-actions">
+        <button id="generateDocBtn" class="btn btn-primary">Generate Word File</button>
+        <button id="resetBtn" class="btn btn-light">Reset</button>
+      </div>
+    </div>
+
+    <section class="panel">
+      <div class="header-preview">
+        <img src="aldar.png" alt="ALDAR Projects logo" class="header-logo">
+        <div class="header-title-group">
+          <div class="header-kicker">ALDAR Projects</div>
+          <div class="header-title-preview">OSH Inspection Report</div>
+        </div>
+      </div>
+      <h2>Report Header</h2>
+      <div class="grid grid-4">
+        <label class="field"><span>Project Title</span><input id="projectTitle" type="text" value="Saadiyat Lagoons Packages 02 & 04 villas and infrastructure work." /></label>
+        <label class="field"><span>Date</span><input id="inspectionDate" type="date" /></label>
+        <label class="field"><span>Time</span><input id="inspectionTime" type="time" value="10:00" /></label>
+        <label class="field"><span>Reference No.</span><input id="referenceNo" type="text" placeholder="209" /></label>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head"><h2>Attendees</h2><button id="addAttendeeBtn" class="btn btn-secondary">+ Add Attendee</button></div>
+      <div class="attendee-table-wrap">
+        <table class="attendee-table">
+          <thead><tr><th>Name</th><th>Designation</th><th>Entity</th><th class="small-col">Remove</th></tr></thead>
+          <tbody id="attendeeRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <h2>Observations</h2>
+        <div class="top-actions"><button id="addObservationBtn" class="btn btn-secondary">+ Add Observation</button><button id="duplicateBtn" class="btn btn-light">Duplicate Last</button></div>
+      </div>
+      <div id="observationsContainer" class="obs-list"></div>
+    </section>
+
+    <div id="statusBox" class="status-box">Ready.</div>
+  </div>
+
+  <template id="attendeeRowTemplate">
+    <tr>
+      <td><input class="attendeeName" type="text" placeholder="Name" /></td>
+      <td><input class="attendeeDesignation" type="text" placeholder="Designation" /></td>
+      <td><select class="attendeeEntity"><option value="KEO">KEO</option><option value="Hill">Hill</option><option value="TAJV">TAJV</option><option value="Innovo">Innovo</option><option value="Aldar">Aldar</option></select></td>
+      <td class="small-col"><button type="button" class="remove-row">✕</button></td>
+    </tr>
+  </template>
+
+  <template id="observationTemplate">
+    <article class="obs-card">
+      <div class="obs-head">
+        <div>
+          <h3>Observation <span class="obs-number"></span></h3>
+          <p>Select the observation, then click auto-fill to bring description, gaps, immediate action, and preventive action.</p>
+        </div>
+        <button type="button" class="remove-obs">✕</button>
+      </div>
+
+      <div class="grid grid-5">
+        <label class="field"><span>Package</span><select class="package"></select></label>
+        <label class="field"><span>Cluster</span><select class="cluster"></select></label>
+        <label class="field"><span>Villa No.</span><input class="villaNo" type="text" placeholder="233" /></label>
+        <label class="field"><span>Observation Category</span><select class="observationCategory"></select></label>
+        <label class="field"><span>Risk Category</span><select class="riskCategory"></select></label>
+      </div>
+
+      <div class="grid grid-4">
+        <label class="field"><span>Category</span><select class="responseCategory"></select></label>
+        <label class="field"><span>By Whom</span><select class="actionOwner"></select></label>
+        <label class="field"><span>Likely Root Cause</span><select class="rootCause"></select></label>
+        <label class="field"><span>Date Closed</span><input class="dateClosed" type="date" /></label>
+      </div>
+
+      <div class="autofill-bar"><button type="button" class="btn btn-secondary autofill-btn">Auto-fill from selected observation</button></div>
+
+      <div class="field">
+        <span>Observation Description</span>
+        <select class="descriptionPresetSelect"></select>
+        <div class="chips descriptionChips"></div>
+        <textarea class="observationDescription" rows="8" placeholder="Description will appear here..."></textarea>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="field">
+          <span>Immediate Action Taken</span>
+          <select class="immediatePresetSelect"></select>
+          <div class="chips immediateChips"></div>
+          <textarea class="immediateAction" rows="8" placeholder="Immediate action will appear here..."></textarea>
+        </div>
+        <div class="field">
+          <span>Action to be taken as agreed, but not limited to</span>
+          <select class="preventivePresetSelect"></select>
+          <div class="chips preventiveChips"></div>
+          <textarea class="preventiveAction" rows="9" placeholder="Preventive action will appear here..."></textarea>
+        </div>
+      </div>
+
+      <div class="grid grid-2">
+        <label class="field"><span>Evidence Label</span><input class="evidenceLabel" type="text" placeholder="Photo reference / note" /></label>
+        <div class="field areaPreviewField"><span>Generated Area Preview</span><div class="areaPreview">Area: Package - Cluster - Villa</div></div>
+      </div>
+
+      <div class="field">
+        <span>ADOSH / Other Requirements</span>
+        <div class="legal-toolbar"><button type="button" class="btn btn-light select-all-legal">Select All</button><button type="button" class="btn btn-light clear-all-legal">Clear All</button></div>
+        <div class="legal-grid"></div>
+        <textarea class="legalCustom" rows="4" placeholder="Additional references if needed..."></textarea>
+      </div>
+
+      <div class="field">
+        <span>Evidence Photos</span>
+        <label class="upload-box"><input class="evidencePhotos" type="file" accept="image/*" multiple /><span>Click to choose photos from your computer</span></label>
+        <div class="photo-preview"></div>
+      </div>
+    </article>
+  </template>
+
+  <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
